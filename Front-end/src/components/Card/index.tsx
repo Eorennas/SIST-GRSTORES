@@ -1,3 +1,5 @@
+import CardBlusa from '../../Assets/blusas.png';
+
 export default function Card() {
     return (
         <div className="shadow-sm pb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 place-items-stretch mx-5 sm:mx-10 lg:mx-80 gap-5 sm:gap-8 lg:gap-10">

@@ -32,14 +32,14 @@ const ProductSlider: React.FC = () => {
                 pagination={{ clickable: true }}
                 navigation={true}
                 breakpoints={{
-                    640: { slidesPerView: 2 }, // 1 slide em telas pequenas
-                    768: { slidesPerView: 3 }, // 2 slides em telas médias
-                    1024: { slidesPerView: 4 }, // 3 slides em telas grandes
+                    640: { slidesPerView: 1 }, // 1 slide em telas pequenas
+                    768: { slidesPerView: 2 }, // 2 slides em telas médias
+                    1024: { slidesPerView: 3 }, // 3 slides em telas grandes
                 }}
             >
                 {products.map((product) => (
                     <SwiperSlide key={product.id}>
-                        <div className="bg-gray-100 p-4 m-4 rounded-lg shadow-md flex flex-col items-center mb-14">
+                        <div className="bg-gray-100 p-4 m-14 shadow-md flex flex-col items-center mb-14">
                             <img
                                 src={product.image}
                                 alt={product.title}

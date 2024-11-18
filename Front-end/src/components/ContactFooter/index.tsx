@@ -3,7 +3,7 @@ import ManFooter from '../../Assets/manFooter.png';
 
 export default function ContactFooter() {
     return (
-        <div className="relative w-full h-[90vh]">
+        <div className="relative w-full h-[90vh] mb-60">
 
             {/* Fundo com imagem de fundo */}
             <div

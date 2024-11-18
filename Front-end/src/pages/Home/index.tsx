@@ -2,6 +2,7 @@ import Header from '../../components/Header';
 import Slide from '../../components/Slide';
 import Card from '../../components/Card';
 import ContactFooter from '../../components/ContactFooter';
+import Footer from '../../components/Footer';
 import BackgroundHome from '../../Assets/backgroundHome.jpg';
 import ManHome from '../../Assets/manHome.png';
 
@@ -57,6 +58,9 @@ export default function Home() {
             </div>
             <div>
                 <ContactFooter />
+            </div>
+            <div>
+                <Footer />
             </div>
         </div>
     );

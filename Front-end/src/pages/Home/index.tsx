@@ -1,5 +1,6 @@
 import Header from '../../components/Header';
 import Slide from '../../components/Slide';
+import Card from '../../components/Card';
 import BackgroundHome from '../../Assets/backgroundHome.jpg';
 import ManHome from '../../Assets/manHome.png';
 
@@ -47,7 +48,12 @@ export default function Home() {
                     BERMUDAS
                 </button>
             </div>
-            <Slide />
+            <div>
+                <Slide />
+            </div>
+            <div>
+                <Card />
+            </div>
         </div>
     );
 }

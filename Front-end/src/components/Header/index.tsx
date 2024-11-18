@@ -18,7 +18,7 @@ export default function Header() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="flex py-2 px-4 sm:px-10 bg-white font-sans h-[90px] tracking-wide relative z-50">
+    <header className="flex py-2 px-4 sm:px-10 bg-white font-sans h-[80px] tracking-wide relative z-50">
       <div className="flex flex-wrap items-center justify-between gap-4 w-full">
         <Link to="/">
           <img src={Logo} alt="logo" className="w-48" />

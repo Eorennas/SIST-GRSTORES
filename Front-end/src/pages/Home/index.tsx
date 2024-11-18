@@ -1,22 +1,23 @@
 import Header from '../../components/Header';
+import Slide from '../../components/Slide';
 import BackgroundHome from '../../Assets/backgroundHome.jpg';
 import ManHome from '../../Assets/manHome.png';
 
 export default function Home() {
     return (
-        <div className="relative w-full h-screen">
+        <div className="absolute w-full h-screen border-0">
             {/* Cabeçalho fixo no topo */}
             <Header />
 
             {/* Container do background e conteúdo */}
             <div
-                className="absolute top-15 left-0 w-full h-full bg-cover bg-center flex items-center"
+                className="absolute top-15 left-0 w-full h-full bg-cover bg-center flex items-center border-0"
                 style={{ backgroundImage: `url(${BackgroundHome})` }}
             >
                 {/* Texto à esquerda */}
                 <div className="ml-36 text-white max-w-lg">
                     <h1 className="text-4xl lg:text-5xl font-bold">
-                        O ESSENCIAL PARA O HOMEM QUE BUSCA MAIS.
+                        O ESSENCIAL <br /> PARA O HOMEM <br /> QUE BUSCA MAIS.
                     </h1>
                     <button className="mt-5 px-6 py-2 bg-white text-black font-semibold rounded shadow hover:bg-gray-200 transition">
                         COMPRAR
@@ -32,6 +33,21 @@ export default function Home() {
                     />
                 </div>
             </div>
+            <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
+                <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    BLUSAS
+                </button>
+                <button className="w-40 px-4  py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    CALÇAS
+                </button>
+                <button className="w-40 px-4  py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    CALÇADOS
+                </button>
+                <button className="w-40 px-4  py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    BERMUDAS
+                </button>
+            </div>
+            <Slide />
         </div>
     );
 }

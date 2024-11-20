@@ -1,6 +1,11 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
+import Blusa from "../../Assets/Images/blusas.png";
+import Calca from "../../Assets/Images/calca.png";
+import Calcado from "../../Assets/Images/calcado.png";
+import Bermuda from "../../Assets/Images/bermuda.png";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -16,13 +21,13 @@ type Product = {
 
 // Definindo os dados dos produtos
 const products: Product[] = [
-    { id: 1, title: "Kit 3 T-shirts", price: "R$150,00", image: '../../Assets/background.png' },
-    { id: 2, title: "Kit 2 T-shirts", price: "R$85,00", image: '../../Assets/backgroundHome.jpg' },
-    { id: 3, title: "Kit 3 T-shirts", price: "R$170,00", image: "../../Assets/blusa.jpg" },
-    { id: 4, title: "T-shirt Básica", price: "R$45,00", image: "/images/kit4.png" },
+    { id: 1, title: "Kit 3 T-shirts", price: "R$150,00", image: Blusa },
+    { id: 2, title: "Kit 2 T-shirts", price: "R$85,00", image: Calca },
+    { id: 3, title: "Kit 3 T-shirts", price: "R$170,00", image: Calcado },
+    { id: 4, title: "T-shirt Básica", price: "R$45,00", image: Bermuda },
 ];
 
-const ProductSlider: React.FC = () => {
+export default function Slide() {
     return (
         <div className="py-10">
             <Swiper
@@ -59,5 +64,3 @@ const ProductSlider: React.FC = () => {
         </div>
     );
 };
-
-export default ProductSlider;

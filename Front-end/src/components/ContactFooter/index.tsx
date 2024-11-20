@@ -1,5 +1,5 @@
-import BackgroundContacts from '../../Assets/backgroundContacts.png';
-import ManFooter from '../../Assets/manFooter.png';
+import BackgroundContacts from '../../Assets/Images/backgroundContacts.png';
+import ManFooter from '../../Assets/Images/manFooter.png';
 
 export default function ContactFooter() {
     return (

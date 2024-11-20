@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import Logo from '../../Assets/logo.png';
+import Logo from '../../Assets/Images/logo.png';
 
 export default function Header() {
   // Estado para controlar o menu colapsável
@@ -15,7 +15,8 @@ export default function Header() {
   };
 
   // Função para determinar se o link está ativo
-  const isActive = (path) => location.pathname === path;
+
+  const isActive = (path: string): boolean => location.pathname === path;
 
   return (
     <header className="flex py-2 px-4 sm:px-10 bg-white font-sans h-[80px] tracking-wide relative z-50">

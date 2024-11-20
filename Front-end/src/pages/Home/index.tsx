@@ -3,8 +3,8 @@ import Slide from '../../components/Slide';
 import Card from '../../components/Card';
 import ContactFooter from '../../components/ContactFooter';
 import Footer from '../../components/Footer';
-import BackgroundHome from '../../Assets/backgroundHome.jpg';
-import ManHome from '../../Assets/manHome.png';
+import BackgroundHome from '../../Assets/Images/backgroundHome.jpg';
+import ManHome from '../../Assets/Images/manHome.png';
 
 export default function Home() {
     return (
@@ -22,7 +22,7 @@ export default function Home() {
                     <h1 className="text-4xl lg:text-5xl font-bold">
                         O ESSENCIAL <br /> PARA O HOMEM <br /> QUE BUSCA MAIS.
                     </h1>
-                    <button className="mt-5 px-6 py-2 bg-white text-black font-semibold rounded shadow hover:bg-gray-200 transition">
+                    <button className="mt-5 px-6 py-2 bg-white text-black text-2xl font-semibold shadow hover:bg-gray-200 transition">
                         COMPRAR
                     </button>
                 </div>

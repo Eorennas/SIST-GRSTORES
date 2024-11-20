@@ -1,4 +1,4 @@
-import bgFooter from '../../Assets/Footer.png';
+import bgFooter from '../../Assets/Images/Footer.png';
 
 export default function Footer() {
     return (

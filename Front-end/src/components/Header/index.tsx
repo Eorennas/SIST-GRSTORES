@@ -27,9 +27,8 @@ export default function Header() {
 
         {/* Menu colapsável */}
         <div
-          className={`${
-            isMenuOpen ? 'block' : 'hidden'
-          } lg:block max-lg:fixed max-lg:top-0 max-lg:right-0 max-lg:w-1/2 max-lg:min-w-[300px] max-lg:h-full max-lg:bg-white max-lg:p-6 max-lg:shadow-md z-50`}
+          className={`${isMenuOpen ? 'block' : 'hidden'
+            } lg:block max-lg:fixed max-lg:top-0 max-lg:right-0 max-lg:w-1/2 max-lg:min-w-[300px] max-lg:h-full max-lg:bg-white max-lg:p-6 max-lg:shadow-md z-50`}
         >
           {/* Botão para fechar o menu */}
           <button
@@ -54,9 +53,8 @@ export default function Header() {
             <li className="max-lg:border-b max-lg:py-3 px-3">
               <Link
                 to="/"
-                className={`block text-xl font-bold ${
-                  isActive('/') ? 'text-black border-b-2 border-black' : 'text-gray-600'
-                }`}
+                className={`block text-xl font-bold ${isActive('/') ? 'text-black border-b-2 border-black' : 'text-gray-600'
+                  }`}
               >
                 HOME
               </Link>
@@ -64,9 +62,8 @@ export default function Header() {
             <li className="max-lg:border-b max-lg:py-3 px-3">
               <Link
                 to="/masculino"
-                className={`block text-xl font-bold ${
-                  isActive('/masculino') ? 'text-black border-b-2 border-black' : 'text-gray-600'
-                }`}
+                className={`block text-xl font-bold ${isActive('/masculino') ? 'text-black border-b-2 border-black' : 'text-gray-600'
+                  }`}
               >
                 MASCULINO
               </Link>
@@ -74,9 +71,8 @@ export default function Header() {
             <li className="max-lg:border-b max-lg:py-3 px-3">
               <Link
                 to="/contatos"
-                className={`block text-xl font-bold ${
-                  isActive('/contatos') ? 'text-black border-b-2 border-black' : 'text-gray-600'
-                }`}
+                className={`block text-xl font-bold ${isActive('/contatos') ? 'text-black border-b-2 border-black' : 'text-gray-600'
+                  }`}
               >
                 CONTATOS
               </Link>
@@ -84,9 +80,8 @@ export default function Header() {
             <li className="max-lg:border-b max-lg:py-3 px-3">
               <Link
                 to="/sobre"
-                className={`block text-xl font-bold ${
-                  isActive('/sobre') ? 'text-black border-b-2 border-black' : 'text-gray-600'
-                }`}
+                className={`block text-xl font-bold ${isActive('/sobre') ? 'text-black border-b-2 border-black' : 'text-gray-600'
+                  }`}
               >
                 SOBRE
               </Link>
@@ -96,18 +91,22 @@ export default function Header() {
 
         {/* Botões e ícones à direita */}
         <div className="flex items-center max-lg:ml-auto space-x-5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30px"
-            height="30px"
-            viewBox="0 0 24 24"
-            className="cursor-pointer hover:fill-[#007bff] inline"
+          <Link
+            to={"/registro"}
           >
-            <circle cx="10" cy="7" r="6" />
-            <path
-              d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
-            />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30px"
+              height="30px"
+              viewBox="0 0 24 24"
+              className="cursor-pointer hover:fill-[#007bff] inline"
+            >
+              <circle cx="10" cy="7" r="6" />
+              <path
+                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+              />
+            </svg>
+          </Link>
 
           <span className="relative">
             <svg

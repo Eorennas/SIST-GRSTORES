@@ -1,98 +1,93 @@
-import { useEffect, useState, useRef, FormEvent } from 'react';
-import { FiTrash } from 'react-icons/fi';
-import { api } from '../../services/api';
-
-interface CustomerProps {
-  id: string;
-  name: string;
-  email: string;
-  status: boolean;
-  created_at: string;
-}
+import { useRef, FormEvent } from "react";
+import { Link } from "react-router-dom";
+import Logo from '../../Assets/Images/logo.png';
 
 export default function Register() {
-  const [customers, setCustomers] = useState<CustomerProps[]>([]);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    loadCustomers();
-  }, []);
-
-  async function loadCustomers() {
-    try {
-      const response = await api.get('/customers');
-      setCustomers(response.data);
-    } catch (error) {
-      console.error('Erro ao carregar clientes:', error);
-    }
-  }
+  const phoneRef = useRef<HTMLInputElement | null>(null);
+  const cpfRef = useRef<HTMLInputElement | null>(null);
+  const profileRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    const name = nameRef.current?.value || "";
+    const email = emailRef.current?.value || "";
+    const phone = phoneRef.current?.value || "";
+    const cpf = cpfRef.current?.value || "";
+    const password = passwordRef.current?.value || "";
 
-    if (!nameRef.current?.value || !emailRef.current?.value) return;
-
-    try {
-      const response = await api.post('/customer', {
-        name: nameRef.current.value,
-        email: emailRef.current.value,
-      });
-
-      nameRef.current.value = '';
-      emailRef.current.value = '';
-
-      setCustomers((prevCustomers) => [...prevCustomers, response.data]);
-
-    } catch (error) {
-      console.error('Erro ao cadastrar cliente:', error);
-    }
-  }
-
-  async function handleDelete(id: string) {
-    try {
-      await api.delete('/customer', {
-        params: {
-          id: id,
-        },
-      });
-
-      // Atualize o estado filtrando o cliente removido
-      setCustomers((prevCustomers) => prevCustomers.filter((customer) => customer.id !== id));
-    } catch (error) {
-      console.error('Erro ao excluir cliente:', error);
-    }
+    console.log({ name, email, phone, cpf, password });
+    // Adicione a lógica de envio dos dados para o backend aqui
   }
 
   return (
-    <div className="w-full min-h-screen bg-gray-900 flex justify-center px-4">
-      <main className="my-10 w-full md:max-w-2xl">
-        <h1 className="text-4xl font-medium text-white">Clientes</h1>
+    <div className="min-h-screen flex flex-col sm:flex-row items-center justify-center bg-white px-6">
+      {/* Botão Voltar e Logo */}
+      <div className="flex flex-col items-center sm:items-start gap-10 w-full sm:w-1/2">
+        <button className="text-gray-600 border border-gray-400 px-4 py-2 rounded-md hover:bg-gray-100">
+          <Link
+           to={"/"}
+           >
+            VOLTAR
+          </Link>
+        </button>
+        <div className="">
+          <img
+            className="w-[70%] mb-40"
+            src={Logo} alt="logo" />
+        </div>
+      </div>
 
-        <form className="flex flex-col my-6" onSubmit={handleSubmit}>
-          <label className="font-medium text-white">Nome: </label>
-          <input type="text" placeholder="Digite seu Nome:" className="w-full mb-5 p-2 rounded" ref={nameRef} />
-
-          <label className="font-medium text-white">Email: </label>
-          <input type="text" placeholder="Digite seu Email:" className="w-full mb-5 p-2 rounded" ref={emailRef} />
-
-          <input type="submit" value="Cadastrar" className="cursor-pointer w-full p-2 bg-green-500 rounded font-medium" />
-        </form>
-
-        <section className="flex flex-col space-y-4">
-          {customers.map((customer) => (
-            <article key={customer.id} className="w-full bg-white rounded p-2 relative hover:scale-105 duration-200">
-              <p><span className="font-medium">Nome:</span> {customer.name}</p>
-              <p><span className="font-medium">Email:</span> {customer.email}</p>
-              <p><span className="font-medium">Status:</span> {customer.status ? "ATIVO" : "INATIVO"}</p>
-              <button className="bg-red-500 w-7 h-7 flex items-center justify-center rounded-lg absolute right-0 -top-2"
-                onClick={() => handleDelete(customer.id)}>
-                <FiTrash size={18} color="#fff" />
-              </button>
-            </article>
-          ))}
-        </section>
-      </main>
+      {/* Formulário */}
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-full sm:w-1/2 max-w-md gap-6"
+      >
+        <input
+          type="text"
+          placeholder="Nome"
+          ref={nameRef}
+          className="border-b border-gray-400 outline-none focus:border-black transition p-2"
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          ref={emailRef}
+          className="border-b border-gray-400 outline-none focus:border-black transition p-2"
+        />
+        <input
+          type="tel"
+          placeholder="Telefone"
+          ref={phoneRef}
+          className="border-b border-gray-400 outline-none focus:border-black transition p-2"
+        />
+        <input
+          type="text"
+          placeholder="CPF"
+          ref={cpfRef}
+          className="border-b border-gray-400 outline-none focus:border-black transition p-2"
+        />
+        <input
+          type="text"
+          placeholder="Perfil"
+          ref={profileRef}
+          className="border-b border-gray-400 outline-none focus:border-black transition p-2"
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          ref={passwordRef}
+          className="border-b border-gray-400 outline-none focus:border-black transition p-2"
+        />
+        <button
+          type="submit"
+          className="bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
+        >
+          Cadastrar
+        </button>
+      </form>
     </div>
   );
 }

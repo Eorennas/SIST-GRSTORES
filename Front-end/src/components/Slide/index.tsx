@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import Blusa from "../../Assets/Images/blusas.png";
@@ -55,7 +55,11 @@ export default function Slide() {
                             </h3>
                             <p className="text-gray-600 mb-4">{product.price}</p>
                             <button className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition">
+                                <Link
+                                 to={'/compra'}
+                                >
                                 COMPRAR
+                                </Link>
                             </button>
                         </div>
                     </SwiperSlide>

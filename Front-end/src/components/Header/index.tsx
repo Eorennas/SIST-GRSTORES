@@ -92,7 +92,7 @@ export default function Header() {
         {/* Botões e ícones à direita */}
         <div className="flex items-center max-lg:ml-auto space-x-5">
           <Link
-            to={"/registro"}
+            to={"/login"}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Header from '../../components/Header';
 import Slide from '../../components/Slide';
 import Card from '../../components/Card';
@@ -37,18 +38,26 @@ export default function Home() {
                 </div>
             </div>
             <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
-                <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
-                    BLUSAS
-                </button>
-                <button className="w-40 px-4  py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
-                    CALÇAS
-                </button>
-                <button className="w-40 px-4  py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
-                    CALÇADOS
-                </button>
-                <button className="w-40 px-4  py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
-                    BERMUDAS
-                </button>
+                <Link to={"/produtos"}>
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                        BLUSAS
+                    </button>
+                </Link>
+                <Link to={"/produtos"}>
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                        CALÇAS
+                    </button>
+                </Link>
+                <Link to={"/produtos"}>
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                        CALÇADOS
+                    </button>
+                </Link>
+                <Link to={"/produtos"}>
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                        BERMUDAS
+                    </button>
+                </Link>
             </div>
             <div>
                 <Slide />

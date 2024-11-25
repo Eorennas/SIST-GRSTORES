@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Product from "../pages/Product";
 import Checkout from "../pages/Checkout";
+import PagProduct from "../pages/pagProduct";
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
         <Route path="/registro" element={<Register />} />
         <Route path="/compra" element={<Product />} />
         <Route path="/fechar-pedido" element={<Checkout />} />
+        <Route path="/produtos" element={<PagProduct />} />
       </Routes>
     </Router>
   );

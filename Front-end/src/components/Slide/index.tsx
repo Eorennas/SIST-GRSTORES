@@ -34,47 +34,49 @@ const products: Product[] = [
 export default function Slide() {
     return (
         <div className="py-10">
-            <Swiper
-                modules={[Pagination, Navigation]} // Módulos do Swiper
-                slidesPerView={4}
-                loop={true} // Ativa loop infinito
-                pagination={{ clickable: true }}
-                navigation={true}
-                breakpoints={{
-                    640: { slidesPerView: 1 }, // 1 slide em telas pequenas
-                    768: { slidesPerView: 2 }, // 2 slides em telas médias
-                    1024: { slidesPerView: 4 }, // 3 slides em telas grandes
-                }}
-            >
-                {products.map((product) => (
-                    <SwiperSlide key={product.id}>
-                        <div className="m-2 flex flex-col justify-center mb-14">
-                            <div>
-                                <img
-                                    src={product.image}
-                                    alt={product.title}
-                                    className="w-full h-80 object-cover mb-4"
-                                />
-                                <div className="flex justify-between items-end">
-                                    <div>
-                                        <h3 className="text-2xl font-semibold text-gray-800">
-                                            {product.title}
-                                        </h3>
-                                        <p className="text-2xl text-gray-600">{product.price}</p>
-                                    </div>
-                                    <div>
-                                        <Link to={'/compra'}>
-                                            <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
-                                                COMPRAR
-                                            </button>
-                                        </Link>
+            <div className="mx-10">
+                <Swiper
+                    modules={[Pagination, Navigation]} // Módulos do Swiper
+                    slidesPerView={4}
+                    loop={true} // Ativa loop infinito
+                    pagination={{ clickable: true }}
+                    navigation={true}
+                    breakpoints={{
+                        640: { slidesPerView: 1 }, // 1 slide em telas pequenas
+                        768: { slidesPerView: 2 }, // 2 slides em telas médias
+                        1024: { slidesPerView: 4 }, // 3 slides em telas grandes
+                    }}
+                >
+                    {products.map((product) => (
+                        <SwiperSlide key={product.id}>
+                            <div className="m-2 flex flex-col justify-center mb-14">
+                                <div>
+                                    <img
+                                        src={product.image}
+                                        alt={product.title}
+                                        className="w-full h-80 object-cover mb-4"
+                                    />
+                                    <div className="flex justify-between items-end">
+                                        <div>
+                                            <h3 className="text-2xl font-semibold text-gray-800">
+                                                {product.title}
+                                            </h3>
+                                            <p className="text-2xl text-gray-600">{product.price}</p>
+                                        </div>
+                                        <div>
+                                            <Link to={'/compra'}>
+                                                <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
+                                                    COMPRAR
+                                                </button>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
         </div>
     );
 };

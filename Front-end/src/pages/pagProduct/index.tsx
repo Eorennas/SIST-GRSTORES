@@ -48,7 +48,7 @@ export default function ProductsGrid() {
                                     <p className="text-2xl text-gray-600">{product.price}</p>
                                 </div>
                                 <div>
-                                    <button className="bg-black text-white px-8 py-2 hover:bg-gray-800 transition">
+                                    <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
                                         <Link
                                             to={'/compra'}
                                         >

@@ -25,6 +25,10 @@ const products: Product[] = [
     { id: 2, title: "Kit 2 T-shirts", price: "R$85,00", image: Calca },
     { id: 3, title: "Kit 3 T-shirts", price: "R$170,00", image: Calcado },
     { id: 4, title: "T-shirt Básica", price: "R$45,00", image: Bermuda },
+    { id: 5, title: "Kit 3 T-shirts", price: "R$150,00", image: Blusa },
+    { id: 6, title: "Kit 2 T-shirts", price: "R$85,00", image: Calca },
+    { id: 7, title: "Kit 3 T-shirts", price: "R$170,00", image: Calcado },
+    { id: 8, title: "T-shirt Básica", price: "R$45,00", image: Bermuda },
 ];
 
 export default function Slide() {
@@ -39,28 +43,36 @@ export default function Slide() {
                 breakpoints={{
                     640: { slidesPerView: 1 }, // 1 slide em telas pequenas
                     768: { slidesPerView: 2 }, // 2 slides em telas médias
-                    1024: { slidesPerView: 3 }, // 3 slides em telas grandes
+                    1024: { slidesPerView: 4 }, // 3 slides em telas grandes
                 }}
             >
                 {products.map((product) => (
                     <SwiperSlide key={product.id}>
-                        <div className="bg-gray-100 p-4 m-14 shadow-md flex flex-col items-center mb-14">
-                            <img
-                                src={product.image}
-                                alt={product.title}
-                                className="w-full h-40 object-cover rounded-md mb-4"
-                            />
-                            <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                                {product.title}
-                            </h3>
-                            <p className="text-gray-600 mb-4">{product.price}</p>
-                            <button className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition">
-                                <Link
-                                 to={'/compra'}
-                                >
-                                COMPRAR
-                                </Link>
-                            </button>
+                        <div className="m-2 flex flex-col justify-center mb-14">
+                            <div>
+                                <img
+                                    src={product.image}
+                                    alt={product.title}
+                                    className="w-full h-80 object-cover mb-4"
+                                />
+                                <div className="flex justify-between items-end">
+                                    <div>
+                                        <h3 className="text-2xl font-semibold text-gray-800">
+                                            {product.title}
+                                        </h3>
+                                        <p className="text-2xl text-gray-600">{product.price}</p>
+                                    </div>
+                                    <div>
+                                        <button className="bg-black text-white px-8 py-2 hover:bg-gray-800 transition">
+                                            <Link
+                                                to={'/compra'}
+                                            >
+                                                COMPRAR
+                                            </Link>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </SwiperSlide>
                 ))}

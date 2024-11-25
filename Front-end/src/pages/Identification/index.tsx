@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 interface IdentificationPageProps {
   onNext: () => void;
   onPrevious: () => void;

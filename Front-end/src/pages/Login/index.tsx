@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
-import axios from 'axios';
+import api from '../../services/api';
 import ManFooter from '../../Assets/Images/manFooter.png';
 
 export default function Login() {
@@ -17,7 +17,7 @@ export default function Login() {
         setLoading(true); // Inicia o estado de carregamento
 
         try {
-            const response = await axios.post('/login', {
+            const response = await api.post('/login', {
                 email,
                 password,
             });
@@ -29,7 +29,7 @@ export default function Login() {
             localStorage.setItem('token', token);
 
             // Redirecione para outra página após login bem-sucedido
-            navigate('/dashboard');
+            navigate('/');
         } catch (err: any) {
             console.error('Erro ao fazer login:', err);
             setError(err.response?.data?.message || 'Erro ao autenticar');

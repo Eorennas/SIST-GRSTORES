@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import { useState } from "react"; // Importando useState para gerenciar o estado
 import Blusa from "../../Assets/Images/blusas.png";
 import Calca from "../../Assets/Images/calca.png";
 import Calcado from "../../Assets/Images/calcado.png";
 import Bermuda from "../../Assets/Images/bermuda.png";
 
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 // Definindo o tipo dos produtos
 type Product = {
@@ -26,13 +28,38 @@ const products: Product[] = [
     { id: 8, title: "T-shirt Básica", price: "R$45,00", image: Bermuda },
 ];
 
-export default function ProductsGrid() {
+export default function PagProduct() {
+    const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de pesquisa
+    const [filteredProducts, setFilteredProducts] = useState(products); // Estado para produtos filtrados
+
+    // Função para filtrar produtos
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const term = e.target.value.toLowerCase();
+        setSearchTerm(term);
+        const filtered = products.filter(product =>
+            product.title.toLowerCase().includes(term)
+        );
+        setFilteredProducts(filtered);
+    };
+
     return (
         <div className="absolute w-full h-screen border-0">
             <Header />
+
+            {/* Barra de pesquisa e filtro */}
+            <div className="flex justify-center items-center mt-40 mx-10">
+                <input
+                    type="text"
+                    placeholder="Pesquisar produtos..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    className="border border-gray-400 rounded-l-md px-4 py-2 w-2/3 focus:outline-none focus:ring-2 focus:ring-black"
+                />
+            </div>
+
             {/* Grid container */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-40 mx-10">
-                {products.map((product) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 mx-10">
+                {filteredProducts.map((product) => (
                     <div key={product.id} className="flex flex-col items-center">
                         <div className="mb-20">
                             <img
@@ -49,11 +76,7 @@ export default function ProductsGrid() {
                                 </div>
                                 <div>
                                     <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
-                                        <Link
-                                            to={'/compra'}
-                                        >
-                                            COMPRAR
-                                        </Link>
+                                        <Link to={'/compra'}>COMPRAR</Link>
                                     </button>
                                 </div>
                             </div>
@@ -61,6 +84,7 @@ export default function ProductsGrid() {
                     </div>
                 ))}
             </div>
+            <Footer />
         </div>
     );
 }

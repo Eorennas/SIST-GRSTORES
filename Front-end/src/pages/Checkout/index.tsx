@@ -9,14 +9,14 @@ interface CartItem {
 
 const cartItems: CartItem[] = [
   {
-    name: 'Camiseta básica de algodão peruano manga curta preto M',
+    name: 'Camiseta básica M',
     price: 79.99,
     image: '/images/product1.png',
     quantity: 1,
   },
 ];
 
-const CheckoutPage: React.FC = () => {
+export default function CheckoutPage() {
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
@@ -123,5 +123,3 @@ const CheckoutPage: React.FC = () => {
     </div>
   );
 };
-
-export default CheckoutPage;

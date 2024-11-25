@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
+import Slide from '../../components/Slide';
+import Card from '../../components/Card';
+import Footer from '../../components/Footer';
 
 interface Product {
   name: string;
@@ -44,7 +47,14 @@ export default function Product() {
   return (
     <div className="relative">
       {/* Main Product Page */}
-      <div className="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <div className="absolute top-8 left-8">
+          <button className="text-gray-600 border border-gray-400 px-4 py-2 rounded-md hover:bg-gray-100 transition">
+            <Link to="/">
+              VOLTAR
+            </Link>
+          </button>
+        </div>
+      <div className="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
         {/* Image Gallery */}
         <div className="flex flex-col gap-4 w-full lg:w-1/2">
           {productData.images.map((url, index) => (
@@ -92,8 +102,8 @@ export default function Product() {
                   key={size}
                   onClick={() => setSelectedSize(size)}
                   className={`px-4 py-2 border rounded-lg text-sm font-medium ${selectedSize === size
-                      ? 'bg-gray-200 border-black'
-                      : 'border-gray-300'
+                    ? 'bg-gray-200 border-black'
+                    : 'border-gray-300'
                     }`}
                 >
                   {size}
@@ -146,7 +156,7 @@ export default function Product() {
                 Total: R$ {cartItems.length * productData.price}
               </p>
               <Link
-               to={'/fechar-pedido'}
+                to={'/fechar-pedido'}
               >
                 <button
                   className="w-full py-3 mt-4 bg-black text-white rounded-lg hover:bg-gray-800"
@@ -158,6 +168,15 @@ export default function Product() {
           </div>
         </div>
       )}
+      <div className='mx-40'>
+        <Slide />
+      </div>
+      <div>
+        <Card />
+      </div>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };

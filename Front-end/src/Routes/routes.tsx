@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -9,6 +10,7 @@ import PagProduct from "../pages/pagProduct";
 export default function AppRoutes() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />

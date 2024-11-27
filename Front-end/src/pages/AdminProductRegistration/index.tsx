@@ -44,12 +44,19 @@ const AdminProductRegistration: React.FC = () => {
       {/* Header */}
       <header className="bg-black p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Produtos</h1>
-        <button
-          onClick={handleOpenModal}
-          className="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700"
-        >
-          Adicionar Produto
-        </button>
+        <div className="flex items-center space-x-4">
+          <input
+            type="text"
+            placeholder="Pesquise o produto"
+            className="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg focus:outline-none"
+          />
+          <button
+            onClick={handleOpenModal}
+            className="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700"
+          >
+            Adicionar Produto
+          </button>
+        </div>
       </header>
 
       {/* Tabela */}

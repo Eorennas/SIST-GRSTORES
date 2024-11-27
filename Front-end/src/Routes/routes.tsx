@@ -42,7 +42,7 @@ export default function AppRoutes() {
         {/* Rotas públicas */}
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
-        <Route path="/registro" element={<Register />} />
+        <Route path="/cadastro" element={<Register />} />
         <Route path="/compra" element={<Product />} />
         <Route path="/fechar-pedido" element={<Checkout />} />
         <Route path="/produtos" element={<PagProduct />} />

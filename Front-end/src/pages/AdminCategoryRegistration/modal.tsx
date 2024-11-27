@@ -4,10 +4,9 @@ import api from "../../services/api";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onCategoryCreated: (category: { id: string; name: string; description: string }) => void;
 }
 
-const CategoryModal: React.FC<ModalProps> = ({ isOpen, onClose, onCategoryCreated }) => {
+const CategoryModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const [formValues, setFormValues] = useState({
     nomeCategoria: "",
     descricaoCategoria: "",
@@ -38,16 +37,13 @@ const CategoryModal: React.FC<ModalProps> = ({ isOpen, onClose, onCategoryCreate
       }
 
       // Incluindo o token no cabeçalho da requisição
-      const response = await api.post("/categories", payload, {
+      await api.post("/categories", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+      }).then((res:any)=>{
+        window.location.reload()
       });
-
-      console.log("Categoria criada com sucesso:", response.data);
-
-      // Passar a nova categoria para o componente pai
-      onCategoryCreated(response.data);
 
       // Fechar o modal após sucesso
       onClose();

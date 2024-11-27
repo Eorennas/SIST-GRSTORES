@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Modal from './modal'
 import api from "../../services/api";
 
 interface Category {
@@ -10,6 +11,17 @@ interface Category {
 
 const AdminCategoryRegistration: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Função para abrir o modal
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Função para fechar o modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     // Chama a função para buscar as categorias assim que o componente for montado
@@ -46,7 +58,7 @@ const AdminCategoryRegistration: React.FC = () => {
             className="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg focus:outline-none"
           />
           <button
-            onClick={() => console.log("Modal Adicionar Categoria")}
+            onClick={handleOpenModal}
             className="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             Adicionar Categoria
@@ -83,6 +95,8 @@ const AdminCategoryRegistration: React.FC = () => {
             )}
           </tbody>
         </table>
+        {/* Modal */}
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
     </div>
   );

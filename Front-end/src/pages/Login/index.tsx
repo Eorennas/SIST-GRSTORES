@@ -26,7 +26,7 @@ export default function Login() {
             console.log('Login bem-sucedido:', user);
 
             // Salve o token no localStorage (ou em outra solução de armazenamento)
-            localStorage.setItem('token', token);
+            localStorage.setItem('GRtoken', token);
 
             // Redirecione para outra página após login bem-sucedido
             navigate('/');
@@ -105,7 +105,7 @@ export default function Login() {
                         </div>
                         <div className="flex justify-between">
                             <Link
-                                to="/registro"
+                                to="/cadastro"
                                 className="items-center mt-4 text-sm text-gray-400 hover:text-white transition"
                             >
                                 Fazer cadastro

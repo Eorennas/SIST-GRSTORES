@@ -1,22 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import api from "../../services/api";
 
-interface Modal {
+interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  formValues: { nomeCategoria: string; descricaoCategoria: string };
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  onCategoryCreated: (category: { id: string; name: string; description: string }) => void;
 }
 
-const CategoryModal: React.FC<Modal> = ({
-  isOpen,
-  onClose,
-  formValues,
-  onChange,
-  onSubmit,
-}) => {
+const CategoryModal: React.FC<ModalProps> = ({ isOpen, onClose, onCategoryCreated }) => {
+  const [formValues, setFormValues] = useState({
+    nomeCategoria: "",
+    descricaoCategoria: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormValues({ ...formValues, [id]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Estruturando o payload para o backend
+    const payload = {
+      name: formValues.nomeCategoria,
+      description: formValues.descricaoCategoria,
+    };
+
+    try {
+      // Obtenha o token do localStorage
+      const token = localStorage.getItem("GRtoken"); // Atualize a chave conforme necessário
+
+      if (!token) {
+        throw new Error("Token de autenticação não encontrado.");
+      }
+
+      // Incluindo o token no cabeçalho da requisição
+      const response = await api.post("/categories", payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Categoria criada com sucesso:", response.data);
+
+      // Passar a nova categoria para o componente pai
+      onCategoryCreated(response.data);
+
+      // Fechar o modal após sucesso
+      onClose();
+    } catch (error) {
+      console.error("Erro ao criar categoria:", error);
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -34,7 +73,7 @@ const CategoryModal: React.FC<Modal> = ({
         <h2 className="text-lg font-semibold mb-6 text-center text-white">
           Adicionar Categoria
         </h2>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           {/* Campo Nome */}
           <div className="mb-4">
             <input
@@ -42,7 +81,7 @@ const CategoryModal: React.FC<Modal> = ({
               type="text"
               placeholder="Nome"
               value={formValues.nomeCategoria}
-              onChange={onChange}
+              onChange={handleChange}
               className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -53,7 +92,7 @@ const CategoryModal: React.FC<Modal> = ({
               id="descricaoCategoria"
               placeholder="Descrição"
               value={formValues.descricaoCategoria}
-              onChange={onChange}
+              onChange={handleChange}
               className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows={3}
             />

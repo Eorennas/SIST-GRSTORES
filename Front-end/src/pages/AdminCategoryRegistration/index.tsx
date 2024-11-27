@@ -1,33 +1,37 @@
-import React, { useState } from "react";
-import CategoryModal from "./modal";
+import React, { useState, useEffect } from "react";
+import api from "../../services/api";
 
-const AdminProductRegistration: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formValues, setFormValues] = useState({
-    nomeCategoria: "",
-    descricaoCategoria: "",
-  });
+interface Category {
+  id: string;
+  name: string;
+  description: string;
+  created_at: string;
+}
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+const AdminCategoryRegistration: React.FC = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setFormValues({ nomeCategoria: "", descricaoCategoria: "" }); // Resetar formulário
-  };
+  useEffect(() => {
+    // Chama a função para buscar as categorias assim que o componente for montado
+    fetchCategories();
+  }, []);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target;
-    setFormValues({ ...formValues, [id]: value });
-  };
+  const fetchCategories = async () => {
+    try {
+      const response = await api.get("/categories", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("GRtoken")}`,
+        },
+      });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Dados do formulário:", formValues);
-    handleCloseModal();
+      // Logando a resposta para verificar
+      console.log(response.data);
+
+      // Atualizando o estado com as categorias recebidas
+      setCategories(response.data.categories);
+    } catch (error) {
+      console.error("Erro ao carregar categorias:", error);
+    }
   };
 
   return (
@@ -42,7 +46,7 @@ const AdminProductRegistration: React.FC = () => {
             className="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg focus:outline-none"
           />
           <button
-            onClick={handleOpenModal}
+            onClick={() => console.log("Modal Adicionar Categoria")}
             className="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             Adicionar Categoria
@@ -60,28 +64,28 @@ const AdminProductRegistration: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td
-                className="border border-gray-700 p-4 text-gray-400 text-center"
-                colSpan={2}
-              >
-                Nenhuma categoria cadastrada.
-              </td>
-            </tr>
+            {categories.length > 0 ? (
+              categories.map((category) => (
+                <tr key={category.id}>
+                  <td className="border border-gray-700 p-4">{category.name}</td>
+                  <td className="border border-gray-700 p-4">{category.description}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  className="border border-gray-700 p-4 text-gray-400 text-center"
+                  colSpan={2}
+                >
+                  Nenhuma categoria cadastrada.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
-
-      {/* Modal */}
-      <CategoryModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        formValues={formValues}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
     </div>
   );
 };
 
-export default AdminProductRegistration;
+export default AdminCategoryRegistration;

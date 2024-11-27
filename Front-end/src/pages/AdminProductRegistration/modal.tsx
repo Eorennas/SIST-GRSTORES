@@ -56,7 +56,7 @@ const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     const productData = {
       name: formValues.nomeProduto,
       description: formValues.descricaoProduto,
@@ -67,20 +67,23 @@ const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       min_stock: parseInt(formValues.estoqueMinimoProduto),
       images: formValues.imagensProduto.split(","),
     };
-
+  
     try {
       const token = localStorage.getItem("GRtoken");
-
+  
       if (!token) {
         throw new Error("Token de autenticação não encontrado.");
       }
-
-      await api.post("/products", productData, {
+  
+      const response = await api.post("/products", productData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
+      const createdProduct = response.data; // Presume que o produto criado é retornado
+      localStorage.setItem("createdProductId", createdProduct.id); // Salva o ID do produto no localStorage
+  
       // Fechar o modal após sucesso
       onClose();
       window.location.reload();
@@ -88,6 +91,7 @@ const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       console.error("Erro ao criar produto:", error);
     }
   };
+  
 
   if (!isOpen) return null;
 

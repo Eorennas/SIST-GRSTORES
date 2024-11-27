@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 
@@ -14,6 +14,7 @@ type Product = {
 };
 
 export default function PagProduct() {
+    const { id } = useParams<{ id: string }>();
     const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de pesquisa
     const [products, setProducts] = useState<Product[]>([]); // Estado para todos os produtos
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]); // Estado para produtos filtrados
@@ -28,7 +29,7 @@ export default function PagProduct() {
         }
 
         try {
-            const response = await api.get("/products", {
+            const response = await api.get(`/products`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
                 },

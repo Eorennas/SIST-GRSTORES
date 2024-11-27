@@ -10,7 +10,7 @@ type Product = {
     id: number;
     name: string;
     price: string;
-    image: string;
+    images: string[];
 };
 
 export default function PagProduct() {
@@ -21,25 +21,16 @@ export default function PagProduct() {
 
     // Função para buscar os produtos da API
     const fetchProducts = async () => {
-        const token = localStorage.getItem("GRtoken"); // Obtém o token do localStorage
-
-        if (!token) {
-            console.error("Token não encontrado.");
-            return;
-        }
 
         try {
-            const response = await api.get(`/products`, {
-                headers: {
-                    Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
-                },
-            });
+            const response = await api.get(`/products/category/${id}`);
             setProducts(response.data); // Define os produtos no estado
             setFilteredProducts(response.data); // Inicializa os produtos filtrados com todos
         } catch (error) {
             console.error("Erro ao carregar produtos:", error);
         }
     };
+
 
     // Carregar os produtos ao montar o componente
     useEffect(() => {
@@ -78,7 +69,7 @@ export default function PagProduct() {
                         <div className="m-2 flex flex-col justify-center mb-14">
                             <div>
                                 <img
-                                    src={product.image}
+                                    src={product.images[0]}
                                     alt={product.name}
                                     className="w-full h-80 object-cover mb-4 bg-gray-200"
                                 />
@@ -90,7 +81,7 @@ export default function PagProduct() {
                                         <p className="text-2xl text-gray-600">{product.price}</p>
                                     </div>
                                     <div>
-                                        <Link to={`compra/${product.id}`}>
+                                        <Link to={`produto/${product.id}`}>
                                             <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
                                                 COMPRAR
                                             </button>

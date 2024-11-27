@@ -69,13 +69,12 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Container de categorias */}
             <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
                 {categories.length > 0 ? (
                     categories?.map((category:any) => (
-                        <Link to={`/produto/${category.id}`} key={category.id}>
+                        <Link to={`/produtos/${category.id}`} key={category.id}>
                             <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
-                                {category.name} {/* Nome da categoria */}
+                                {category.name}
                             </button>
                         </Link>
                     ))
@@ -87,9 +86,9 @@ export default function Home() {
             <div>
                 <Slide />
             </div>
-            <div>
+            {/* <div>
                 <Card />
-            </div>
+            </div> */}
             <div>
                 <ContactFooter />
             </div>

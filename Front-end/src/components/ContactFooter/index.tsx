@@ -1,6 +1,6 @@
 import BackgroundContacts from '../../Assets/Images/backgroundContacts.png';
 import ManFooter from '../../Assets/Images/manFooter.png';
-
+import Whatsapp from '../../Assets/Images/whatsapp.png';
 export default function ContactFooter() {
     return (
         <div className="relative w-full h-[90vh] mb-60">
@@ -30,8 +30,8 @@ export default function ContactFooter() {
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat.
                     </p>
-                    <button className="mt-5 px-10 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition flex items-center">
-                        <img src="/path/to/whatsapp-icon.png" alt="WhatsApp" className="w-5 h-5 mr-2" />
+                    <button className="mt-5 px-10 py-4 bg-green-500 text-black font-semibold shadow hover:bg-gray-200 transition flex items-center rounded-lg">
+                        <img src={Whatsapp} alt="WhatsApp" className="w-6 h-6 mr-2" />
                         WHATSAPP
                     </button>
                 </div>

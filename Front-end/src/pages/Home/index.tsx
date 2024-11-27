@@ -23,7 +23,7 @@ export default function Home() {
                     <h1 className="text-4xl lg:text-5xl font-bold">
                         O ESSENCIAL <br /> PARA O HOMEM <br /> QUE BUSCA MAIS.
                     </h1>
-                    <button className="mt-5 px-6 py-2 bg-white text-black text-2xl font-semibold shadow hover:bg-gray-200 transition">
+                    <button className="mt-5 px-6 py-2 bg-white text-black text-2xl font-semibold shadow hover:bg-gray-200 transition rounded-lg">
                         COMPRAR
                     </button>
                 </div>
@@ -39,22 +39,22 @@ export default function Home() {
             </div>
             <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
                 <Link to={"/produtos"}>
-                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
                         BLUSAS
                     </button>
                 </Link>
                 <Link to={"/produtos"}>
-                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
                         CALÇAS
                     </button>
                 </Link>
                 <Link to={"/produtos"}>
-                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
                         CALÇADOS
                     </button>
                 </Link>
                 <Link to={"/produtos"}>
-                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transition border-2">
+                    <button className="w-40 px-4 py-4 bg-white text-black font-semibold transform transition-transform duration-300 hover:scale-105 shadow hover:bg-gray-200  border-2 rounded-lg ">
                         BERMUDAS
                     </button>
                 </Link>

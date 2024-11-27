@@ -6,13 +6,13 @@ import { useState, useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
+import Pack from '../../Assets/Images/pack.png';
 // Definindo o tipo dos produtos
 type Product = {
   id: number;
   name: string;
   price: string;
-  image: string;
+  images: string;
 };
 
 export default function Slide() {
@@ -20,34 +20,28 @@ export default function Slide() {
 
   // Função para buscar os produtos da API com o token de autorização
   const fetchProducts = async () => {
-    const token = localStorage.getItem("GRtoken");
+    await api.get("/products", {
+    }).then((res: any) => {
+      const data: Product[] = res.data
+      setProducts(data)
+      console.log(products)
+    }).catch((err: any) => {
+      console.error("Erro ao carregar produtos:", err);
+    });
 
-    if (!token) {
-      console.error("Token não encontrado");
-      return;
-    }
-
-    try {
-      const response = await api.get("/products", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data: Product[] = response.data;
-      setProducts(data);
-    } catch (error) {
-      console.error("Erro ao carregar produtos:", error);
-    }
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
+  console.log('rere')
+
   return (
     <div className="py-10">
       <div className="mx-10">
         <Swiper
+           
           modules={[Pagination, Navigation]}
           slidesPerView={4}
           loop={true}
@@ -61,25 +55,28 @@ export default function Slide() {
         >
           {products.length > 0 ? (
             products.map((product) => (
-              <SwiperSlide key={product.id}>
-                <div className="m-2 flex flex-col justify-center mb-14">
+              <SwiperSlide key={product.id} >
+                <div className="m-2 flex flex-col justify-center mb-14 transform transition-transform duration-300 hover:scale-105 " 
+                  style={{boxShadow: '1px 1px 3px 3px #898b8f'}}
+                >
                   <div>
                     <img
-                      src={product.image}
+                      src={product?.images[0] || Pack}
                       alt={product.name}
-                      className="w-full h-80 object-cover mb-4 bg-gray-200"
+                      style={{objectFit:"fill" }}
+                      className="w-full h-80 object-cover mb-4 bg-gray-200 "
                     />
-                    <div className="flex justify-between items-end">
+                    <div className="flex justify-between items-end  bg-gray-500 p-2">
                       <div>
-                        <h3 className="text-2xl font-semibold text-gray-800">
+                        <h3 className="text-2xl font-semibold text-black">
                           {product.name}
                         </h3>
-                        <p className="text-2xl text-gray-600">{product.price}</p>
+                        <p className="text-2xl text-white">R$: {product.price}</p>
                       </div>
                       <div>
                         {/* Link para a página do produto com o ID */}
                         <Link to={`/compra/${product.id}`}>
-                          <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
+                          <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
                             COMPRAR
                           </button>
                         </Link>

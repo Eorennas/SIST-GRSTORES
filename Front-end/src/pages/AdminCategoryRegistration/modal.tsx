@@ -37,13 +37,18 @@ const CategoryModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       }
 
       // Incluindo o token no cabeçalho da requisição
-      await api.post("/categories", payload, {
+      const response = await api.post("/categories", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((res:any)=>{
-        window.location.reload()
       });
+
+      // Salvar o ID da categoria no localStorage
+      const categoryId = response.data.id; // Assumindo que o ID está presente na resposta
+      localStorage.setItem("categoryId", categoryId);
+
+      // Atualizar a página ou realizar qualquer outra ação após salvar
+      window.location.reload();
 
       // Fechar o modal após sucesso
       onClose();

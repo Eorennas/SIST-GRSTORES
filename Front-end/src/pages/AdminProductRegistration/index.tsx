@@ -13,7 +13,7 @@ const AdminProductRegistration: React.FC = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setFormValues({ nomeCategoria: "", descricaoCategoria: "" }); // Reset form
+    setFormValues({ nomeCategoria: "", descricaoCategoria: "" }); // Resetar formulário
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -23,7 +23,6 @@ const AdminProductRegistration: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica de submissão pode ser implementada aqui
     console.log("Dados do formulário:", formValues);
     handleCloseModal();
   };
@@ -36,7 +35,7 @@ const AdminProductRegistration: React.FC = () => {
         <div className="flex items-center space-x-4">
           <input
             type="text"
-            placeholder="Pesquise aqui o nome da categoria"
+            placeholder="Pesquise a categoria"
             className="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg focus:outline-none"
           />
           <button
@@ -48,7 +47,7 @@ const AdminProductRegistration: React.FC = () => {
         </div>
       </header>
 
-      {/* Table */}
+      {/* Tabela */}
       <div className="p-6">
         <table className="w-full border-collapse border border-gray-700">
           <thead>
@@ -72,58 +71,49 @@ const AdminProductRegistration: React.FC = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg w-96 p-6 relative">
-            {/* Close Button */}
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+          <div className="bg-gray-800 rounded-lg w-[400px] p-6 relative shadow-md">
+            {/* Botão de Fechar */}
             <button
               onClick={handleCloseModal}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-200"
             >
               X
             </button>
 
-            {/* Modal Content */}
-            <h2 className="text-xl font-semibold mb-4 text-center">
+            {/* Conteúdo do Modal */}
+            <h2 className="text-lg font-semibold mb-6 text-center text-white">
               Adicionar Categoria
             </h2>
             <form onSubmit={handleSubmit}>
+              {/* Campo Nome */}
               <div className="mb-4">
-                <label
-                  htmlFor="nomeCategoria"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Nome da Categoria
-                </label>
                 <input
                   id="nomeCategoria"
                   type="text"
-                  placeholder="Nome da Categoria"
+                  placeholder="Nome"
                   value={formValues.nomeCategoria}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
+              {/* Campo Descrição */}
               <div className="mb-4">
-                <label
-                  htmlFor="descricaoCategoria"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Descrição da Categoria
-                </label>
                 <textarea
                   id="descricaoCategoria"
-                  placeholder="Descrição da Categoria"
+                  placeholder="Descrição"
                   value={formValues.descricaoCategoria}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows={3}
                 />
               </div>
 
+              {/* Botão Salvar */}
               <button
                 type="submit"
-                className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800"
+                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
               >
                 Salvar
               </button>

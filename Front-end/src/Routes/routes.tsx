@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import Product from "../pages/Product";
 import Checkout from "../pages/Checkout";
 import PagProduct from "../pages/pagProduct";
+import AdminCategoryRegistration from "../pages/AdminCategoryRegistration"; // Tela de cadastro de produtos (Admin)
 import AdminProductRegistration from "../pages/AdminProductRegistration"; // Tela de cadastro de produtos (Admin)
 import UserPurchases from "../pages/UserPurchases"; // Tela de compras para usuários autenticados
 
@@ -45,6 +46,10 @@ export default function AppRoutes() {
         <Route path="/compra" element={<Product />} />
         <Route path="/fechar-pedido" element={<Checkout />} />
         <Route path="/produtos" element={<PagProduct />} />
+        <Route
+          path="/adm/cadastro-category"
+          element={<AdminCategoryRegistration />}
+        />
         <Route
           path="/adm/cadastro-product"
           element={<AdminProductRegistration />}

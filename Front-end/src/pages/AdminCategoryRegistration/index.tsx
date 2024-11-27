@@ -3,11 +3,8 @@ import React, { useState } from "react";
 const AdminProductRegistration: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formValues, setFormValues] = useState({
-    nomeProduto: "",
-    descricaoProduto: "",
-    precoProduto: "",
-    categoriaProduto: "",
-    estoqueProduto: "",
+    nomeCategoria: "",
+    descricaoCategoria: "",
   });
 
   const handleOpenModal = () => {
@@ -16,7 +13,7 @@ const AdminProductRegistration: React.FC = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setFormValues({ nomeProduto: "", descricaoProduto: "", precoProduto: "", categoriaProduto: "", estoqueProduto: "", }); // Resetar formulário
+    setFormValues({ nomeCategoria: "", descricaoCategoria: "" }); // Resetar formulário
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -34,18 +31,18 @@ const AdminProductRegistration: React.FC = () => {
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
       <header className="bg-black p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Produtos</h1>
+        <h1 className="text-2xl font-bold">Categorias</h1>
         <div className="flex items-center space-x-4">
           <input
             type="text"
-            placeholder="Pesquise o produto"
+            placeholder="Pesquise a categoria"
             className="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg focus:outline-none"
           />
           <button
             onClick={handleOpenModal}
             className="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700"
           >
-            Adicionar Produto
+            Adicionar Categoria
           </button>
         </div>
       </header>
@@ -57,18 +54,15 @@ const AdminProductRegistration: React.FC = () => {
             <tr className="bg-gray-800">
               <th className="border border-gray-700 p-4 text-left">Nome</th>
               <th className="border border-gray-700 p-4 text-left">Descrição</th>
-              <th className="border border-gray-700 p-4 text-left">Preço</th>
-              <th className="border border-gray-700 p-4 text-left">Categoria</th>
-              <th className="border border-gray-700 p-4 text-left">Estoque</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td
                 className="border border-gray-700 p-4 text-gray-400 text-center"
-                colSpan={5}
+                colSpan={2}
               >
-                Nenhum produto cadastrado.
+                Nenhuma categoria cadastrada.
               </td>
             </tr>
           </tbody>
@@ -89,16 +83,16 @@ const AdminProductRegistration: React.FC = () => {
 
             {/* Conteúdo do Modal */}
             <h2 className="text-lg font-semibold mb-6 text-center text-white">
-              Adicionar Produto
+              Adicionar Categoria
             </h2>
             <form onSubmit={handleSubmit}>
               {/* Campo Nome */}
               <div className="mb-4">
                 <input
-                  id="nomeProduto"
+                  id="nomeCategoria"
                   type="text"
                   placeholder="Nome"
-                  value={formValues.nomeProduto}
+                  value={formValues.nomeCategoria}
                   onChange={handleChange}
                   className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -107,55 +101,12 @@ const AdminProductRegistration: React.FC = () => {
               {/* Campo Descrição */}
               <div className="mb-4">
                 <textarea
-                  id="descricaoProduto"
+                  id="descricaoCategoria"
                   placeholder="Descrição"
-                  value={formValues.descricaoProduto}
+                  value={formValues.descricaoCategoria}
                   onChange={handleChange}
                   className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows={3}
-                />
-              </div>
-
-              {/* Campo Nome */}
-              <div className="mb-4">
-                <input
-                  id="precoProduto"
-                  type="number"
-                  placeholder="Preço"
-                  value={formValues.precoProduto}
-                  onChange={handleChange}
-                  className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              {/* Campo Nome */}
-              <div className="mb-4">
-                <select
-                  id="categoriaProduto"
-                  value={formValues.categoriaProduto}
-                  onChange={handleChange}
-                  className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="" disabled>
-                    Selecione uma Categoria
-                  </option>
-                  <option value="categoria1">Categoria 1</option>
-                  <option value="categoria2">Categoria 2</option>
-                  <option value="categoria3">Categoria 3</option>
-                  <option value="categoria4">Categoria 4</option>
-                </select>
-              </div>
-
-
-              {/* Campo Nome */}
-              <div className="mb-4">
-                <input
-                  id="estoqueProduto"
-                  type="number"
-                  placeholder="Estoque"
-                  value={formValues.estoqueProduto}
-                  onChange={handleChange}
-                  className="w-full bg-gray-700 text-gray-300 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 

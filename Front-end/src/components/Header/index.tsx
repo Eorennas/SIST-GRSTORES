@@ -1,8 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from '../../Assets/Images/logo.png';
+interface HeaderProps {
+  click: () => void; // Ensure `click` is a function
+}
 
-export default function Header() {
+export default function Header({click}:HeaderProps) {
   // Estado para controlar o menu colapsável
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,10 +22,10 @@ export default function Header() {
   const isActive = (path: string): boolean => location.pathname === path;
 
   return (
-    <header className="flex py-2 px-4 sm:px-10 bg-white font-sans h-[80px] tracking-wide relative z-50">
-      <div className="flex flex-wrap items-center justify-between gap-4 w-full">
+    <header className="flex py-2 px-4 sm:px-10 bg-white font-sans h-[80px] tracking-wide relative ">
+      <div className="flex flex-wrap items-center justify-between gap-4 w-full z-10" >
         <Link to="/">
-          <img src={Logo} alt="logo" className="w-48" />
+          <img src={Logo} alt="logo" className="w-48 " />
         </Link>
 
         {/* Menu colapsável */}
@@ -108,22 +111,26 @@ export default function Header() {
             </svg>
           </Link>
 
+
           <span className="relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30px"
-              height="30px"
-              className="cursor-pointer hover:fill-[#007bff] inline"
-              viewBox="0 0 512 512"
-            >
-              <path
-                d="M164.96 300.004h.024c.02 0 .04-.004.059-.004H437a15.003 15.003 0 0 0 14.422-10.879l60-210a15.003 15.003 0 0 0-2.445-13.152A15.006 15.006 0 0 0 497 60H130.367l-10.722-48.254A15.003 15.003 0 0 0 105 0H15C6.715 0 0 6.715 0 15s6.715 15 15 15h77.969c1.898 8.55 51.312 230.918 54.156 243.71C131.184 280.64 120 296.536 120 315c0 24.812 20.188 45 45 45h272c8.285 0 15-6.715 15-15s-6.715-15-15-15H165c-8.27 0-15-6.73-15-15 0-8.258 6.707-14.977 14.96-14.996zM477.114 90l-51.43 180H177.032l-40-180zM150 405c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm167 15c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm0 0"
-              />
-            </svg>
-            <span className="absolute left-auto -ml-1 top-0 rounded-full bg-red-500 px-1 py-0 text-xs text-white">
-              0
-            </span>
+            <button onClick={() => click()} className="">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30px"
+                height="30px"
+                className="cursor-pointer hover:fill-[#007bff] inline"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M164.96 300.004h.024c.02 0 .04-.004.059-.004H437a15.003 15.003 0 0 0 14.422-10.879l60-210a15.003 15.003 0 0 0-2.445-13.152A15.006 15.006 0 0 0 497 60H130.367l-10.722-48.254A15.003 15.003 0 0 0 105 0H15C6.715 0 0 6.715 0 15s6.715 15 15 15h77.969c1.898 8.55 51.312 230.918 54.156 243.71C131.184 280.64 120 296.536 120 315c0 24.812 20.188 45 45 45h272c8.285 0 15-6.715 15-15s-6.715-15-15-15H165c-8.27 0-15-6.73-15-15 0-8.258 6.707-14.977 14.96-14.996zM477.114 90l-51.43 180H177.032l-40-180zM150 405c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm167 15c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm0 0"
+                />
+              </svg>
+              <span className="absolute left-auto -ml-1 top-0 rounded-full bg-red-500 px-1 py-0 text-xs text-white">
+                0
+              </span>
+            </button>
           </span>
+
 
           {/* Botão para abrir o menu */}
           <button onClick={toggleMenu} className="lg:hidden !ml-7">

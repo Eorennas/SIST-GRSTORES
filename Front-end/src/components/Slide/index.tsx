@@ -18,10 +18,6 @@ type Product = {
 export default function Slide() {
   const [products, setProducts] = useState<Product[]>([]);
 
-  async function goToProduct(id: string) {
-    await localStorage.setItem('idProduct', id)
-  }
-
   // Função para buscar os produtos da API com o token de autorização
   const fetchProducts = async () => {
     await api.get("/products", {
@@ -67,15 +63,14 @@ export default function Slide() {
                     <img
                       src={product?.images[0] || Pack}
                       alt={product.name}
-                      style={{objectFit:"fill" }}
-                      className="w-full h-80 object-cover mb-4 bg-gray-200 "
+                      className="w-full h-80 object-cover bg-gray-200 "
                     />
-                    <div className="flex justify-between items-end  bg-gray-500 p-2">
+                    <div className="flex justify-between items-end p-2">
                       <div>
                         <h3 className="text-2xl font-semibold text-black">
                           {product.name}
                         </h3>
-                        <p className="text-2xl text-white">R$: {product.price}</p>
+                        <p className="text-2xl text-black">R$: {product.price}</p>
                       </div>
                       <div>
                         {/* Link para a página do produto com o ID */}

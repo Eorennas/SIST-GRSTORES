@@ -1,43 +1,56 @@
 import { Link } from "react-router-dom";
-import { useState } from "react"; // Importando useState para gerenciar o estado
-import Blusa from "../../Assets/Images/blusas.png";
-import Calca from "../../Assets/Images/calca.png";
-import Calcado from "../../Assets/Images/calcado.png";
-import Bermuda from "../../Assets/Images/bermuda.png";
+import { useState, useEffect } from "react";
+import api from "../../services/api";
 
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 // Definindo o tipo dos produtos
 type Product = {
     id: number;
-    title: string;
+    name: string;
     price: string;
     image: string;
 };
 
-// Definindo os dados dos produtos
-const products: Product[] = [
-    { id: 1, title: "Kit 3 T-shirts", price: "R$150,00", image: Blusa },
-    { id: 2, title: "Kit 2 T-shirts", price: "R$85,00", image: Calca },
-    { id: 3, title: "Kit 3 T-shirts", price: "R$170,00", image: Calcado },
-    { id: 4, title: "T-shirt Básica", price: "R$45,00", image: Bermuda },
-    { id: 5, title: "Kit 3 T-shirts", price: "R$150,00", image: Blusa },
-    { id: 6, title: "Kit 2 T-shirts", price: "R$85,00", image: Calca },
-    { id: 7, title: "Kit 3 T-shirts", price: "R$170,00", image: Calcado },
-    { id: 8, title: "T-shirt Básica", price: "R$45,00", image: Bermuda },
-];
-
 export default function PagProduct() {
     const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de pesquisa
-    const [filteredProducts, setFilteredProducts] = useState(products); // Estado para produtos filtrados
+    const [products, setProducts] = useState<Product[]>([]); // Estado para todos os produtos
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]); // Estado para produtos filtrados
+
+    // Função para buscar os produtos da API
+    const fetchProducts = async () => {
+        const token = localStorage.getItem("GRtoken"); // Obtém o token do localStorage
+
+        if (!token) {
+            console.error("Token não encontrado.");
+            return;
+        }
+
+        try {
+            const response = await api.get("/products", {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+                },
+            });
+            setProducts(response.data); // Define os produtos no estado
+            setFilteredProducts(response.data); // Inicializa os produtos filtrados com todos
+        } catch (error) {
+            console.error("Erro ao carregar produtos:", error);
+        }
+    };
+
+    // Carregar os produtos ao montar o componente
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
     // Função para filtrar produtos
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
-        const filtered = products.filter(product =>
-            product.title.toLowerCase().includes(term)
+        const filtered = products.filter((product) =>
+            product.name.toLowerCase().includes(term)
         );
         setFilteredProducts(filtered);
     };
@@ -59,31 +72,38 @@ export default function PagProduct() {
 
             {/* Grid container */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 mx-10">
-                {filteredProducts.map((product) => (
-                    <div key={product.id} className="flex flex-col items-center">
-                        <div className="mb-20">
-                            <img
-                                src={product.image}
-                                alt={product.title}
-                                className="w-full h-80 object-cover mb-4"
-                            />
-                            <div className="flex justify-between items-end">
-                                <div>
-                                    <h3 className="text-2xl font-semibold text-gray-800">
-                                        {product.title}
-                                    </h3>
-                                    <p className="text-2xl text-gray-600">{product.price}</p>
-                                </div>
-                                <div>
-                                    <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
-                                        <Link to={'/compra'}>COMPRAR</Link>
-                                    </button>
+                {filteredProducts.length > 0 ? (
+                    filteredProducts.map((product) => (
+                        <div className="m-2 flex flex-col justify-center mb-14">
+                            <div>
+                                <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    className="w-full h-80 object-cover mb-4 bg-gray-200"
+                                />
+                                <div className="flex justify-between items-end">
+                                    <div>
+                                        <h3 className="text-2xl font-semibold text-gray-800">
+                                            {product.name}
+                                        </h3>
+                                        <p className="text-2xl text-gray-600">{product.price}</p>
+                                    </div>
+                                    <div>
+                                        <Link to={"/compra"}>
+                                            <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
+                                                COMPRAR
+                                            </button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <div className="text-center w-full py-10">Carregando produtos...</div>
+                )}
             </div>
+
             <Footer />
         </div>
     );

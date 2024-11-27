@@ -6,14 +6,13 @@ import { useState, useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Product from "../../pages/Product";
 
 // Definindo o tipo dos produtos
 type Product = {
   id: number;
   name: string;
   price: string;
-  image: string[];
+  image: string;
 };
 
 export default function Slide() {
@@ -66,7 +65,7 @@ export default function Slide() {
                 <div className="m-2 flex flex-col justify-center mb-14">
                   <div>
                     <img
-                      src={product.image[0]}
+                      src={product.image}
                       alt={product.name}
                       className="w-full h-80 object-cover mb-4 bg-gray-200"
                     />

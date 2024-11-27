@@ -3,6 +3,7 @@ import Blusa from '../../Assets/Images/blusas.png';
 import Calca from '../../Assets/Images/calca.png';
 import Calcado from '../../Assets/Images/calcado.png';
 import Bermuda from '../../Assets/Images/bermuda.png';
+import api from '../../services/api'
 
 export default function Card() {
     return (

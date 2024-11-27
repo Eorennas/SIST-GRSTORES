@@ -18,6 +18,10 @@ type Product = {
 export default function Slide() {
   const [products, setProducts] = useState<Product[]>([]);
 
+  async function goToProduct(id: string) {
+    await localStorage.setItem('idProduct', id)
+  }
+
   // Função para buscar os produtos da API com o token de autorização
   const fetchProducts = async () => {
     await api.get("/products", {
@@ -75,7 +79,7 @@ export default function Slide() {
                       </div>
                       <div>
                         {/* Link para a página do produto com o ID */}
-                        <Link to={`/compra/${product.id}`}>
+                        <Link to={`/produto/${product.id}`}>
                           <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
                             COMPRAR
                           </button>

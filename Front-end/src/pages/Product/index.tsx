@@ -18,26 +18,14 @@ interface Product {
 }
 
 export default function ProductDetail() {
-  const { id } = useParams<{ id: string }>(); // Obtém o ID da URL
+  const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const token = localStorage.getItem("GRtoken");
-
-        if (!token) {
-          console.error("Token não encontrado.");
-          return;
-        }
-
-        const response = await api.get(`/products/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
+        const response = await api.get(`/products/${id}`, {});
         setProduct(response.data);
       } catch (error) {
         console.error("Erro ao carregar o produto:", error);
@@ -58,28 +46,26 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="relative">
-      <div className="absolute top-8 left-8">
-        <button className="text-gray-600 border border-gray-400 px-4 py-2 rounded-md hover:bg-gray-100 transition">
-          <Link to="/">VOLTAR</Link>
-        </button>
-      </div>
+    <div className="relative p-4 min-h-screen bg-gray-100">
+      <button className="text-gray-600 border border-gray-400 px-4 py-2 rounded-md hover:bg-gray-100 transition">
+        <Link to="/">VOLTAR</Link>
+      </button>
 
-      <div className="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+      <div className="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto bg-white rounded-lg shadow-md mt-6 overflow-hidden">
         {/* Imagem do Produto */}
-        <div className="flex flex-col gap-4 w-full lg:w-1/2">
+        <div className="flex flex-col gap-4 lg:w-1/2">
           {product.images.map((url, index) => (
             <img
               key={index}
               src={url}
               alt={product.name}
-              className="w-full rounded-lg object-cover"
+              className="rounded-lg object-cover w-full h-96"
             />
           ))}
         </div>
 
         {/* Detalhes do Produto */}
-        <div className="flex flex-col w-full lg:w-1/2">
+        <div className="flex flex-col w-full lg:w-1/2 p-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">{product.name}</h1>
           <p className="text-gray-600 mb-4">{product.description}</p>
           <p className="text-3xl font-bold text-gray-900 mb-4">

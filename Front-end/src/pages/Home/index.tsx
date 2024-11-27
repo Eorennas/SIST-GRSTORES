@@ -8,6 +8,7 @@ import BackgroundHome from '../../Assets/Images/backgroundHome.jpg';
 import ManHome from '../../Assets/Images/manHome.png';
 
 export default function Home() {
+    
     return (
         <div className="absolute w-full h-screen border-0">
             {/* Cabeçalho fixo no topo */}

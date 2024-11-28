@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Slide from '../../components/Slide';
 import Card from '../../components/Card';
@@ -6,15 +7,35 @@ import ContactFooter from '../../components/ContactFooter';
 import Footer from '../../components/Footer';
 import BackgroundHome from '../../Assets/Images/backgroundHome.jpg';
 import ManHome from '../../Assets/Images/manHome.png';
+import api from '../../services/api';
 import ModalCart from '../../components/ModalCart';
-import { useState } from 'react';
+
 
 export default function Home() {
     const [openModal, setOpenModal] = useState<boolean>(false)
+    const [categories, setCategories] = useState([]); // Estado para armazenar as categorias
 
     const handleModal = () => {
         setOpenModal(!openModal)
     }
+
+    useEffect(() => {
+        // Função para buscar categorias da API usando Axios
+        const fetchCategories = async () => {
+
+            try {
+                const response = await api.get('/categories')
+
+                setCategories(response.data.categories); // Armazena as categorias no estado
+            } catch (error) {
+                console.error("Erro ao carregar produtos:", error);
+            }
+        };
+
+        fetchCategories();
+    }, []); // O array vazio [] garante que a função execute uma vez após o componente ser montado
+
+   
     return (
         <>
 
@@ -50,41 +71,36 @@ export default function Home() {
                         />
                     </div>
                 </div>
-                <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
-                    <Link to={"/produtos"}>
-                        <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
-                            BLUSAS
-                        </button>
-                    </Link>
-                    <Link to={"/produtos"}>
-                        <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
-                            CALÇAS
-                        </button>
-                    </Link>
-                    <Link to={"/produtos"}>
-                        <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
-                            CALÇADOS
-                        </button>
-                    </Link>
-                    <Link to={"/produtos"}>
-                        <button className="w-40 px-4 py-4 bg-white text-black font-semibold transform transition-transform duration-300 hover:scale-105 shadow hover:bg-gray-200  border-2 rounded-lg ">
-                            BERMUDAS
-                        </button>
-                    </Link>
-                </div>
-                <div>
-                    <Slide />
-                </div>
-                <div>
-                    <Card />
-                </div>
-                <div>
-                    <ContactFooter />
-                </div>
-                <div>
-                    <Footer />
-                </div>
+          
+
+            <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
+                {categories.length > 0 ? (
+                    categories?.map((category:any) => (
+                        <Link to={`/produtos/${category.id}`} key={category.id}>
+                            <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
+                                {category.name}
+                            </button>
+                        </Link>
+                    ))
+                ) : (
+                    <div className="text-center w-full py-10">Nenhuma categoria encontrada.</div>
+                )}
             </div>
-        </>
+
+            <div>
+                <Slide />
+            </div>
+            {/* <div>
+                <Card />
+            </div> */}
+            <div>
+                <ContactFooter />
+            </div>
+            <div>
+                <Footer />
+            </div>
+        </div>
+
+       </>
     );
 }

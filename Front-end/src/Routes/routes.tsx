@@ -46,7 +46,7 @@ export default function AppRoutes() {
         <Route path="/cadastro" element={<Register />} />
         <Route path="/produto/:id" element={<Product />} />
         <Route path="/fechar-pedido" element={<Checkout />} />
-        <Route path="/produtos" element={<PagProduct />} />
+        <Route path="/produtos/:id" element={<PagProduct />} />
         <Route
           path="/adm/cadastro-category"
           element={<AdminCategoryRegistration />}

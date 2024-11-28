@@ -1,12 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Logo from '../../Assets/Images/logo.png';
 import ModalCart from '../ModalCart';
+import { getTotalItemCart } from '../../utils/function';
 
 export default function Header() {
   // Estado para controlar o menu colapsável
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [totalItemCart, setTotalItemCart] = useState<boolean>(false)
   const handleModal = () => {
       setOpenModal(!openModal)
   }
@@ -22,6 +24,9 @@ export default function Header() {
 
   // Função para determinar se o link está ativo
 
+  useEffect(() => {
+    setTotalItemCart(getTotalItemCart())
+  },[])
   const isActive = (path: string): boolean => location.pathname === path;
 
   return (
@@ -132,7 +137,7 @@ export default function Header() {
                   />
                 </svg>
                 <span className="absolute left-auto -ml-1 top-0 rounded-full bg-red-500 px-1 py-0 text-xs text-white">
-                  0
+                  {totalItemCart || 0} 
                 </span>
               </button>
             </span>

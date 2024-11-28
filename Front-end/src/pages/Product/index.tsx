@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../services/api";
+import { saveToLocalStorage } from "../../utils/function";
 
 interface Product {
   id: string;
@@ -45,6 +46,16 @@ export default function ProductDetail() {
     return <div className="text-center py-10">Produto não encontrado.</div>;
   }
 
+  function addTOCart(){
+    const data:any = {
+      quantityProduct: 1,
+      title: product?.name,
+      price: product?.price,
+      img: product?.images[0],
+    }
+    saveToLocalStorage(data)
+  }
+
   return (
     <div className="relative p-4 min-h-screen bg-gray-200">
       <button className="text-white border bg-black border-gray-400 px-4 py-2 rounded-md hover:bg-white hover:text-black transition">
@@ -80,7 +91,7 @@ export default function ProductDetail() {
           <p className="text-lg text-gray-700 mb-4">
             Categoria: <strong>{product.category.name}</strong>
           </p>
-          <button className="bg-black align-self-end text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
+          <button onClick={() => addTOCart()} className="bg-black align-self-end text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
             Adicionar ao Carrinho
           </button>
         </div>

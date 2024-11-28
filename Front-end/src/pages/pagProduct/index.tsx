@@ -81,7 +81,7 @@ export default function PagProduct() {
                                         <p className="text-2xl text-gray-600">{product.price}</p>
                                     </div>
                                     <div>
-                                        <Link to={`produto/${product.id}`}>
+                                        <Link  to={`/produto/${product.id}`}>
                                             <button className="bg-black text-white px-10 py-2 hover:bg-gray-800 transition">
                                                 COMPRAR
                                             </button>

@@ -8,16 +8,10 @@ import Footer from '../../components/Footer';
 import BackgroundHome from '../../Assets/Images/backgroundHome.jpg';
 import ManHome from '../../Assets/Images/manHome.png';
 import api from '../../services/api';
-import ModalCart from '../../components/ModalCart';
-
 
 export default function Home() {
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [categories, setCategories] = useState([]); // Estado para armazenar as categorias
-
-    const handleModal = () => {
-        setOpenModal(!openModal)
-    }
 
     useEffect(() => {
         // Função para buscar categorias da API usando Axios
@@ -76,7 +70,7 @@ export default function Home() {
             <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
                 {categories.length > 0 ? (
                     categories?.map((category:any) => (
-                        <Link to={`/produtos/${category.id}`} key={category.id}>
+                        <Link to={`/produtos/categoria/${category.id}`} key={category.id}>
                             <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
                                 {category.name}
                             </button>

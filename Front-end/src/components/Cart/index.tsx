@@ -8,13 +8,12 @@ interface CartItem {
 }
 
 export default function Cart() {
-    const { state } = useLocation(); // Pegando o state que foi passado de Checkout
-    const { cartItems, subtotal } = state || {}; // Desestruturando as informações
+    const { state } = useLocation(); 
+    const { cartItems, subtotal } = state || {}; 
 
     return (
         <div className="max-w-5xl mx-auto p-6 bg-white">
 
-            {/* Carrinho de Itens */}
             <div className="mb-6">
                 <h2 className="text-lg font-bold mb-2">Resumo do Pedido</h2>
                 <div className="grid grid-cols-4 gap-10">

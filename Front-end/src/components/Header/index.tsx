@@ -21,10 +21,12 @@ export default function Header() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  
 
   // Função para determinar se o link está ativo
 
   useEffect(() => {
+    const token = localStorage.getItem("GRstore")
     setTotalItemCart(getTotalItemCart())
   },[openModal])
   const isActive = (path: string): boolean => location.pathname === path;

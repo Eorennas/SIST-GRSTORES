@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import api from '../../services/api';
@@ -17,20 +17,25 @@ export default function Login() {
         setLoading(true); // Inicia o estado de carregamento
 
         try {
-            const response = await api.post('/login', {
+            await api.post('/login', {
                 email,
                 password,
+            }).then((res: any) => {
+                const { token, customer } = res.data; 
+                console.log('Login bem-sucedido:', customer);
+                localStorage.setItem('GRtoken', token);
+                localStorage.setItem('userId', customer.id);
+                let path:any = localStorage.getItem('path')
+                if (path != null && path != 'undefined'){
+                    navigate(path)
+                    localStorage.setItem('path', 'undefined')
+                }
+                else{
+                    navigate('/');
+                }
             });
 
-            const { token, customer } = response.data; // Extrai token e customer do backend
-            console.log('Login bem-sucedido:', customer);
 
-            // Salva token e ID do usuário no localStorage
-            localStorage.setItem('GRtoken', token);
-            localStorage.setItem('userId', customer.id);
-
-            // Redireciona para a página inicial
-            navigate('/');
         } catch (err: any) {
             console.error('Erro ao fazer login:', err);
             setError(err.response?.data?.message || 'Erro ao autenticar');
@@ -38,6 +43,13 @@ export default function Login() {
             setLoading(false); // Finaliza o estado de carregamento
         }
     };
+
+    useLayoutEffect(() => {
+        const token = localStorage.getItem('GRtoken');
+        if (token) {
+            navigate('/'); // Redireciona para a página inicial ou outra página
+        }
+    }, [navigate]);
 
     return (
         <div className="flex items-center justify-center h-screen bg-black bg-cover">

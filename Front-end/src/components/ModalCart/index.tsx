@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CardProductModal from "../CardProductModal";
 import { getFromLocalStorage, updateToLocalStorage } from "../../utils/function";
+import Swal from "sweetalert2";
 
 
 interface HeaderProps {
@@ -11,6 +12,7 @@ interface HeaderProps {
 
 export default function ModalCart({ click }: HeaderProps) {
   const [products, setProducts] = useState<any>([])
+  const navigation  = useNavigate()
   useEffect(() => {
     const data = getFromLocalStorage()
     setProducts(data)
@@ -42,6 +44,32 @@ export default function ModalCart({ click }: HeaderProps) {
     }
   };
 
+  const goToFinishBuy =() =>{
+    const token = localStorage.getItem("GRtoken") || null
+    
+    if (token == null || token == "undefined"){
+      
+      localStorage.setItem('path', '/fechar-pedido')
+      navigation('/login')
+      Swal.fire({
+        title: 'Faça o login para continuar com a compra!',
+        toast: true,
+        position: 'top-right',
+        icon: 'warning',
+        iconColor: '#000',
+        background: '#ffff',
+        color: '#000',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        showCloseButton: true,
+      });
+
+    }else{
+      navigation('/fechar-pedido')
+    }
+  }
+
 
   return (
     <div onClick={() => click()} className="fixed z-20 w-screen flex justify-end bg-gray-600 bg-opacity-70">
@@ -69,13 +97,9 @@ export default function ModalCart({ click }: HeaderProps) {
             </div>
           ))}
         </div>
-
-        <Link to={"/fechar-pedido"}>
-          <button className="bg-black self-center text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
+          <button onClick={() => goToFinishBuy()} className="bg-black self-center text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
             finalizar o pedido
           </button>
-        </Link>
-
       </div>
     </div>
   )

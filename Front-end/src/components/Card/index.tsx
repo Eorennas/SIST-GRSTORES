@@ -17,7 +17,8 @@ export default function Card() {
         const fetchCategories = async () => {
             try {
                 const response = await api.get('/categories');
-                setCategories(response.data.categories); // Armazena as categorias no estado
+                // Pega as 4 primeiras categorias
+                setCategories(response.data.categories.slice(0, 4)); // Armazena as 4 primeiras categorias no estado
             } catch (error) {
                 console.error('Erro ao carregar categorias:', error);
             }

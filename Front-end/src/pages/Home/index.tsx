@@ -29,11 +29,11 @@ export default function Home() {
         fetchCategories();
     }, []); // O array vazio [] garante que a função execute uma vez após o componente ser montado
 
-   
+
     return (
         <>
 
-            
+
             <div className="absolute w-full h-screen border-0">
 
                 {/* Cabeçalho fixo no topo */}
@@ -65,36 +65,36 @@ export default function Home() {
                         />
                     </div>
                 </div>
-          
 
-            <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
-                {categories.length > 0 ? (
-                    categories?.map((category:any) => (
-                        <Link to={`/produtos/categoria/${category.id}`} key={category.id}>
-                            <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
-                                {category.name}
-                            </button>
-                        </Link>
-                    ))
-                ) : (
-                    <div className="text-center w-full py-10">Nenhuma categoria encontrada.</div>
-                )}
-            </div>
 
-            <div>
-                <Slide />
-            </div>
-            {/* <div>
+                <div className="flex justify-center items-center mt-[calc(100vh)] p-10 gap-10">
+                    {categories.length > 0 ? (
+                        categories?.map((category: any) => (
+                            <Link to={`/produtos/categoria/${category.id}`} key={category.id}>
+                                <button className="w-40 px-4 py-4 bg-white text-black font-semibold shadow hover:bg-gray-200 transform transition-transform duration-300 hover:scale-105 border-2 rounded-lg">
+                                    {category.name}
+                                </button>
+                            </Link>
+                        ))
+                    ) : (
+                        <div className="text-center w-full py-10">Nenhuma categoria encontrada.</div>
+                    )}
+                </div>
+
+                <div>
+                    <Slide />
+                </div>
+                {/* <div>
                 <Card />
             </div> */}
-            <div>
-                <ContactFooter />
+                <div>
+                    <ContactFooter />
+                </div>
+                <div>
+                    <Footer />
+                </div>
             </div>
-            <div>
-                <Footer />
-            </div>
-        </div>
 
-       </>
+        </>
     );
 }

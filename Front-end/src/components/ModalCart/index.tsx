@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CardProductModal from "../CardProductModal";
 import { getFromLocalStorage, updateToLocalStorage } from "../../utils/function";
 
 
 interface HeaderProps {
-  click: () => void; 
+  click: () => void;
 }
 
 
@@ -21,23 +22,23 @@ export default function ModalCart({ click }: HeaderProps) {
   }, []);
 
   const handleIncrement = (index: number) => {
-    const updatedProducts:any = [...products];
+    const updatedProducts: any = [...products];
     updatedProducts[index].quantityProduct += 1;
     setProducts(updatedProducts);
-    updateToLocalStorage(updatedProducts); 
+    updateToLocalStorage(updatedProducts);
   };
 
   const handleDecrement = (index: number) => {
     const updatedProducts: any = [...products];
-  
+
     if (updatedProducts[index].quantityProduct > 1) {
       updatedProducts[index].quantityProduct -= 1;
       setProducts(updatedProducts);
-      updateToLocalStorage(updatedProducts); 
+      updateToLocalStorage(updatedProducts);
     } else if (updatedProducts[index].quantityProduct === 1) {
-      const filteredProducts = updatedProducts.filter((_:any, i:any) => i !== index);
+      const filteredProducts = updatedProducts.filter((_: any, i: any) => i !== index);
       setProducts(filteredProducts);
-      updateToLocalStorage(filteredProducts); 
+      updateToLocalStorage(filteredProducts);
     }
   };
 
@@ -52,26 +53,28 @@ export default function ModalCart({ click }: HeaderProps) {
           <button className=" font-bold" onClick={() => click()}>x</button>
         </div>
         <div className="flex h-full flex-col py-2">
-      {products.map((product:any, index:any) => (
-        <div key={index}>
-          <CardProductModal 
-            quantityProduct={product.quantityProduct} 
-            title={product.title} 
-            price={product.price} 
-            img={product.img}
-            increment={() => handleIncrement(index)}
-            decrement={() => handleDecrement(index)}
-          />
-          {index < products.length - 1 && (
-            <div className="w-full h-[1px] bg-gray-300 my-2"></div>
-          )}
+          {products.map((product: any, index: any) => (
+            <div key={index}>
+              <CardProductModal
+                quantityProduct={product.quantityProduct}
+                title={product.title}
+                price={product.price}
+                img={product.img}
+                increment={() => handleIncrement(index)}
+                decrement={() => handleDecrement(index)}
+              />
+              {index < products.length - 1 && (
+                <div className="w-full h-[1px] bg-gray-300 my-2"></div>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
 
-        <button className="bg-black self-center text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
-          finalizar o pedido
-        </button>
+        <Link to={"/fechar-pedido"}>
+          <button className="bg-black self-center text-white px-10 py-2 hover:bg-gray-800 transition rounded-lg ">
+            finalizar o pedido
+          </button>
+        </Link>
 
       </div>
     </div>

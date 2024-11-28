@@ -22,13 +22,14 @@ export default function Login() {
                 password,
             });
 
-            const { token, user } = response.data; // Supondo que a API retorne um token e dados do usuário
-            console.log('Login bem-sucedido:', user);
+            const { token, customer } = response.data; // Extrai token e customer do backend
+            console.log('Login bem-sucedido:', customer);
 
-            // Salve o token no localStorage (ou em outra solução de armazenamento)
+            // Salva token e ID do usuário no localStorage
             localStorage.setItem('GRtoken', token);
+            localStorage.setItem('userId', customer.id);
 
-            // Redirecione para outra página após login bem-sucedido
+            // Redireciona para a página inicial
             navigate('/');
         } catch (err: any) {
             console.error('Erro ao fazer login:', err);
@@ -122,4 +123,4 @@ export default function Login() {
             </div>
         </div>
     );
-};
+}

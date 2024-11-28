@@ -5,6 +5,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Product from "../pages/Product";
 import Checkout from "../pages/Checkout";
+import Identification from "../pages/Identification";
+import Payment from "../pages/Payment";
+import Conclusion from "../pages/ConclusionPayment";
 import PagProduct from "../pages/pagProduct";
 import AllProduct from "../pages/AllProducts";
 import Admin from "../pages/Admin"; // tela de adminstrador
@@ -48,6 +51,9 @@ export default function AppRoutes() {
         <Route path="/produto/:id" element={<Product />} />
         <Route path="/all-produtos" element={<AllProduct />} />
         <Route path="/fechar-pedido" element={<Checkout />} />
+        <Route path="/identificação" element={<Identification />} />
+        <Route path="/concluido" element={<Conclusion />} />
+        <Route path="/pagamento" element={<Payment />} />
         <Route path="/produtos/categoria/:id" element={<PagProduct />} />
         <Route
           path="/adm/cadastro-category"

@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import api from "../../services/api";
 import Slide from "../../components/Slide/index";
 import Card from "../../components/Card/index";
-import Footer from "../../components/Footer/index";
 
 interface Product {
   id: string;

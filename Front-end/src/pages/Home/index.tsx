@@ -49,11 +49,11 @@ export default function Home() {
                         <h1 className="text-4xl lg:text-5xl font-bold">
                             O ESSENCIAL <br /> PARA O HOMEM <br /> QUE BUSCA MAIS.
                         </h1>
-                        <Link to={"/produtos"}>
+                        {/* <Link to={"/produtos"}>
                             <button className="mt-5 px-6 py-2 bg-white text-black text-2xl font-semibold shadow hover:bg-gray-200 transition rounded-lg">
                                 COMPRAR
                             </button>
-                        </Link>
+                        </Link> */}
                     </div>
 
                     {/* Homem à direita */}

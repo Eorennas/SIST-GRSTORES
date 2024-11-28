@@ -75,11 +75,11 @@ export default function Header() {
               </li>
               <li className="max-lg:border-b max-lg:py-3 px-3">
                 <Link
-                  to="/masculino"
+                  to="/all-produtos"
                   className={`block text-xl font-bold ${isActive('/masculino') ? 'text-black border-b-2 border-black' : 'text-gray-600'
                     }`}
                 >
-                  MASCULINO
+                  PRODUTOS
                 </Link>
               </li>
               <li className="max-lg:border-b max-lg:py-3 px-3">

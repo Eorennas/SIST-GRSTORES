@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../services/api";
 import { saveToLocalStorage } from "../../utils/function";
+import Slide from "../../components/Slide/index";
+import Card from "../../components/Card/index";
+
 
 interface Product {
   id: string;
@@ -96,6 +99,12 @@ export default function ProductDetail() {
           </button>
         </div>
 
+      </div>
+      <div>
+        <Slide />
+      </div>
+      <div>
+        <Card />
       </div>
     </div>
   );

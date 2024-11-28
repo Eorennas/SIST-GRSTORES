@@ -26,7 +26,7 @@ export default function Header() {
 
   useEffect(() => {
     setTotalItemCart(getTotalItemCart())
-  },[])
+  },[openModal])
   const isActive = (path: string): boolean => location.pathname === path;
 
   return (

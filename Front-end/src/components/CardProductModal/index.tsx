@@ -5,22 +5,12 @@ type CardProps = {
   price: string;
   title: string;
   quantityProduct: number | 0;
+  increment :() => void;
+  decrement : () => void;
 }
 
-export default function CardProductModal({ img, price, title, quantityProduct }: CardProps) {
-  const [quantity, setQuantity] = useState<number>(quantityProduct);
+export default function CardProductModal({ img, price, title, quantityProduct, increment, decrement }: CardProps) {
 
-  // Função para incrementar a quantidade
-  const increment = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
-  };
-
-  // Função para decrementar a quantidade
-  const decrement = () => {
-    if (quantity > 1) {
-      setQuantity(prevQuantity => prevQuantity - 1);
-    }
-  };
 
   useEffect
   return (
@@ -36,7 +26,7 @@ export default function CardProductModal({ img, price, title, quantityProduct }:
             onClick={decrement}
             className="border-r px-4 py-2 text-sm hover:bg-gray-200">-</button>
 
-          <span className="mx-4 text-sm">{quantity}</span>
+          <span className="mx-4 text-sm">{quantityProduct}</span>
 
           <button
             onClick={increment}

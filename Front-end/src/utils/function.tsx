@@ -34,7 +34,7 @@ export const saveToLocalStorage = (newProduct:CardProps) => {
       title: 'Adicionado ao carrinho',
       toast: true,
       position: 'top-right',
-      icon: 'check',
+      icon: 'success',
       iconColor: '#FFF',
       background: '#ffff',
       color: '#000',
@@ -47,26 +47,24 @@ export const saveToLocalStorage = (newProduct:CardProps) => {
   showPopup()
 };
 
+export const updateToLocalStorage = (newProduct:CardProps[]) => {
+  localStorage.setItem("carts", JSON.stringify(newProduct));
+
+};
+
 export const getFromLocalStorage = () => {
   const data:any = localStorage.getItem("carts")
-  // Recupera os produtos armazenados no localStorage
   const storedProducts = JSON.parse(data) || [];
 
-  // Exibe no console para visualização (opcional)
-  console.log("Retrieved carts:", storedProducts);
-
-  return storedProducts; // Retorna o array de produtos
+  return storedProducts;
 };
 
 export const getTotalItemCart = () => {
   const data:any = localStorage.getItem("carts")
-  // Recupera os produtos armazenados no localStorage
+
   const storedProducts = JSON.parse(data) || [];
 
-  // Exibe no console para visualização (opcional)
-  console.log("Retrieved carts:", storedProducts);
-
-  return storedProducts.length; // Retorna o array de produtos
+  return storedProducts.length;
 };
 
 

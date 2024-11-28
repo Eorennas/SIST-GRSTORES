@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import CardProductModal from "../CardProductModal";
-import { getFromLocalStorage } from "../../utils/function";
+import { getFromLocalStorage, updateToLocalStorage } from "../../utils/function";
 
 
 interface HeaderProps {
-  click: () => void; // Ensure `click` is a function
+  click: () => void; 
 }
 
 
@@ -19,6 +19,29 @@ export default function ModalCart({ click }: HeaderProps) {
       document.body.style.overflow = 'auto';
     };
   }, []);
+
+  const handleIncrement = (index: number) => {
+    const updatedProducts:any = [...products];
+    updatedProducts[index].quantityProduct += 1;
+    setProducts(updatedProducts);
+    updateToLocalStorage(updatedProducts); 
+  };
+
+  const handleDecrement = (index: number) => {
+    const updatedProducts: any = [...products];
+  
+    if (updatedProducts[index].quantityProduct > 1) {
+      updatedProducts[index].quantityProduct -= 1;
+      setProducts(updatedProducts);
+      updateToLocalStorage(updatedProducts); 
+    } else if (updatedProducts[index].quantityProduct === 1) {
+      const filteredProducts = updatedProducts.filter((_:any, i:any) => i !== index);
+      setProducts(filteredProducts);
+      updateToLocalStorage(filteredProducts); 
+    }
+  };
+
+
   return (
     <div onClick={() => click()} className="fixed z-20 w-screen flex justify-end bg-gray-600 bg-opacity-70">
 
@@ -35,7 +58,9 @@ export default function ModalCart({ click }: HeaderProps) {
             quantityProduct={product.quantityProduct} 
             title={product.title} 
             price={product.price} 
-            img={product.img} 
+            img={product.img}
+            increment={() => handleIncrement(index)}
+            decrement={() => handleDecrement(index)}
           />
           {index < products.length - 1 && (
             <div className="w-full h-[1px] bg-gray-300 my-2"></div>

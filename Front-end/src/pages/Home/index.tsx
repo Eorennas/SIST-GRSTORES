@@ -39,11 +39,11 @@ export default function Home() {
     return (
         <>
 
-            {openModal ? (<ModalCart click={handleModal} />) : (<></>)}
+            
             <div className="absolute w-full h-screen border-0">
 
                 {/* Cabeçalho fixo no topo */}
-                <Header click={handleModal} />
+                <Header />
 
                 {/* Container do background e conteúdo */}
                 <div

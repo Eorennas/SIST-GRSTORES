@@ -49,7 +49,7 @@ export default function PagProduct() {
 
     return (
         <div className="absolute w-full h-screen border-0">
-            <Header click={() =>{}} />
+            <Header />
 
             {/* Barra de pesquisa e filtro */}
             <div className="flex justify-center items-center mt-40 mx-10">
